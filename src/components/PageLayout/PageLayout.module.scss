@@ -1,0 +1,36 @@
+.page {
+  width: 100%;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 2rem 1rem;
+  border-bottom: 1px solid #e6e6e6;
+}
+
+.headerText {
+  h1 {
+    margin: 0;
+    font-size: 2rem;
+    font-weight: 700;
+  }
+
+  p {
+    margin: 0.5rem 0 0;
+    color: #666;
+  }
+}
+
+.actions {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.content {
+  max-width: 960px; // makes it wider on desktop
+  margin: 0 auto;
+  padding: 1.5rem 1rem;
+}
