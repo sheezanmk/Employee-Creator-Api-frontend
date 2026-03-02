@@ -1,9 +1,31 @@
+import { useNavigate } from "react-router-dom";
+import { useEmployeeMutations } from "../../hooks/useEmployeeMutations";
+import PageLayout from "../../components/PageLayout/PageLayout";
+import EmployeeForm from "../../components/CreateEmployeeForm/EmployeeForm";
+import type { EmployeeFormValues } from "../../form/employeeFormSchema";
+
 const NewEmployeePage = () => {
-  return (
-   <main>
-    <h1>Add an employee</h1>
-    <p>This will be the create employee form</p>
-    </main>
+
+    const navigate = useNavigate();
+    const { createMutation } = useEmployeeMutations();
+
+     const handleCancel = () => {
+    navigate("/employees");
+  };
+
+    const handleSubmit = async (values: EmployeeFormValues) => {
+    const created = await createMutation.mutateAsync(values);
+    navigate(`/employees/${created.id}`);
+  };
+
+return (
+      <PageLayout title="Add employee">
+      <EmployeeForm
+        onSubmit={handleSubmit}
+        onCancel={handleCancel}
+        isSubmitting={createMutation.isPending}
+      />
+    </PageLayout>
   )
 }
 
