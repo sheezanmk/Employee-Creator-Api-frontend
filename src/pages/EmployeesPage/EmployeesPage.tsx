@@ -1,23 +1,20 @@
 import PageLayout from "../../components/PageLayout/PageLayout";
 import Button from "../../components/Button/Button";
 import EmployeeCard from "../../components/EmployeeCard/EmployeeCard";
+import { useEmployees } from "../../hooks/useEmployees";
+import { useEmployeeMutations } from "../../hooks/useEmployeeMutations";
+
 const EmployeesPage = () => {
-const mockEmployees = [
-  {
-    id: 1,
-    firstName: "John",
-    lastName: "Doe",
-    contractType: "Permanent",
-    email: "john.doe@email.com",
-  },
-  {
-    id: 2,
-    firstName: "Jane",
-    lastName: "Smith",
-    contractType: "Contract",
-    email: "jane.smith@email.com",
-  },
-];
+
+const { data, isLoading, error } = useEmployees();
+const { deleteMutation } = useEmployeeMutations();
+
+const handleRemove = (id: number) => {
+  const ok = window.confirm("Are you sure you want to remove this employee?");
+  if (!ok) return;
+
+  deleteMutation.mutate(id);
+};
 
   return (
     <PageLayout
@@ -26,15 +23,22 @@ const mockEmployees = [
       actions={<Button to="/employees/new">Add employee</Button>}
       >
 
-        {mockEmployees.map((emp) => (
-        <EmployeeCard
-          key={emp.id}
-          id={emp.id}
-          firstName={emp.firstName}
-          lastName={emp.lastName}
-          contractType={emp.contractType}
-          email={emp.email}
-        />
+        {isLoading && <p>Loading employees...</p>}
+
+      {error && <p style={{ color: "red" }}>Failed to load employees</p>}
+
+      {data &&
+        data.map((emp) => (
+      <EmployeeCard
+       key={emp.id}
+      id={emp.id}
+      firstName={emp.firstName}
+      lastName={emp.lastName}
+      contractType={emp.contractType}
+      email={emp.email}
+      onRemove={handleRemove}
+      isRemoving={deleteMutation.isPending}
+/>
       ))}
 
 

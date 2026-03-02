@@ -2,17 +2,20 @@ import Button from "../Button/Button";
 import styles from "./EmployeeCard.module.scss";
 
 
+
 type EmployeeCardProps = {
   id: number;
   firstName: string;
   lastName: string;
   contractType: string;
   email: string;
+  onRemove: (id: number) => void;
+ isRemoving?: boolean;
 };
 
-const EmployeeCard = ({id, firstName, lastName, contractType, email}: EmployeeCardProps) => {
+const EmployeeCard = ({id, firstName, lastName, contractType, email, onRemove, isRemoving}: EmployeeCardProps) => {
 
-  return (
+   return (
     <div className={styles.card}>
       <div className={styles.info}>
         <p>
@@ -28,7 +31,7 @@ const EmployeeCard = ({id, firstName, lastName, contractType, email}: EmployeeCa
 
       <div className={styles.actions}>
         <Button to={`/employees/${id}/edit`}>Edit</Button>
-        <Button onClick={() => console.log("Remove", id)}>Remove</Button>
+        <Button onClick={() => onRemove(id)}>Remove</Button>
       </div>
     </div>
   );

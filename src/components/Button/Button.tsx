@@ -6,6 +6,7 @@ type ButtonProps = {
   to?: string;
   onClick?: () => void;
   type?: "button" | "submit" | "reset";
+  
 };
 
 export default function Button({ children, to, onClick, type = "button" }: ButtonProps) {
@@ -18,7 +19,7 @@ export default function Button({ children, to, onClick, type = "button" }: Butto
   }
 
   return (
-    <button className={styles.button} type={type} onClick={onClick}>
+    <button className={styles.button}  type={type} onClick={onClick}>
       {children}
     </button>
   );
