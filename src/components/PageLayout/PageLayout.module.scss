@@ -6,6 +6,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  max-width: 760px;
+  margin: 0 auto;   
   gap: 1rem;
   padding: 2rem 1rem;
   border-bottom: 1px solid #e6e6e6;
@@ -30,7 +32,7 @@
 }
 
 .content {
-  max-width: 960px; // makes it wider on desktop
+  max-width: 960px; 
   margin: 0 auto;
   padding: 1.5rem 1rem;
 }
