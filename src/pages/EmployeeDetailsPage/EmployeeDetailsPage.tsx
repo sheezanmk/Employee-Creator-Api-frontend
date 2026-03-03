@@ -1,10 +1,11 @@
 import { Link, useParams } from "react-router-dom";
 import PageLayout from "../../components/PageLayout/PageLayout";
-import { useEmployee } from "../../hooks/useEmployee";
+import { useEmployee } from "../../hooks/UseEmployee";
 import styles from "./EmployeeDetailsPage.module.scss";
 import Button from "../../components/Button/Button";
+import type { ContractType, WorkType } from "../../types/employee";
 
-const formatted = (value: string) =>
+const formatted = (value: ContractType | WorkType) =>
   value
     .toLowerCase()
     .replace(/_/g, " ")

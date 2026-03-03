@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { useEmployeeMutations } from "../../hooks/useEmployeeMutations";
+import { useEmployeeMutations } from "../../hooks/UseEmployeeMutations";
 import PageLayout from "../../components/PageLayout/PageLayout";
 import EmployeeForm from "../../components/CreateEmployeeForm/EmployeeForm";
 import type { EmployeeFormValues } from "../../form/employeeFormSchema";

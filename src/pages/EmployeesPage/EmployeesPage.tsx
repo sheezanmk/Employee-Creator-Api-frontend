@@ -1,8 +1,8 @@
 import PageLayout from "../../components/PageLayout/PageLayout";
 import Button from "../../components/Button/Button";
 import EmployeeCard from "../../components/EmployeeCard/EmployeeCard";
-import { useEmployees } from "../../hooks/useEmployees";
-import { useEmployeeMutations } from "../../hooks/useEmployeeMutations";
+import { useEmployees } from "../../hooks/UseEmployees";
+import { useEmployeeMutations } from "../../hooks/UseEmployeeMutations";
 
 const EmployeesPage = () => {
 

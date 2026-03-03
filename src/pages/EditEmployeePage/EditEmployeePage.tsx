@@ -3,7 +3,7 @@ import PageLayout from "../../components/PageLayout/PageLayout";
 import EmployeeForm from "../../components/CreateEmployeeForm/EmployeeForm";
 import type { EmployeeFormValues } from "../../form/employeeFormSchema";
 import { useEmployee } from "../../hooks/useEmployee";
-import { useEmployeeMutations } from "../../hooks/useEmployeeMutations";
+import { useEmployeeMutations } from "../../hooks/UseEmployeeMutations";
 
 const EditEmployeePage = () => {
 

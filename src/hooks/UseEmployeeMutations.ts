@@ -3,7 +3,9 @@ import {
   createEmployee,
   deleteEmployee,
   updateEmployee,
+  patchEmployee
 } from "../services/employee-services";
+import type { UpdateEmployeeDto, PatchEmployeeDto } from "../types/employee";
 
 export function useEmployeeMutations() {
   const queryClient = useQueryClient();
@@ -16,7 +18,7 @@ export function useEmployeeMutations() {
   });
 
   const updateMutation = useMutation({
-    mutationFn: ({ id, data }: { id: number; data: any }) =>
+    mutationFn: ({ id, data }: { id: number; data: UpdateEmployeeDto }) =>
       updateEmployee(id, data),
     onSuccess: (_, variables) => {
       queryClient.invalidateQueries({ queryKey: ["employees"] });
@@ -31,9 +33,19 @@ export function useEmployeeMutations() {
     },
   });
 
+  const patchMutation = useMutation({
+  mutationFn: ({ id, data }: { id: number; data: PatchEmployeeDto }) =>
+    patchEmployee(id, data),
+  onSuccess: (_, variables) => {
+    queryClient.invalidateQueries({ queryKey: ["employees"] });
+    queryClient.invalidateQueries({ queryKey: ["employee", variables.id] });
+  },
+});
+
   return {
     createMutation,
     updateMutation,
+    patchMutation,
     deleteMutation,
   };
 }

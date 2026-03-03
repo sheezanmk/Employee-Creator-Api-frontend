@@ -1,3 +1,4 @@
+import type { ContractType } from "../../types/employee";
 import Button from "../Button/Button";
 import styles from "./EmployeeCard.module.scss";
 
@@ -7,7 +8,7 @@ type EmployeeCardProps = {
   id: number;
   firstName: string;
   lastName: string;
-  contractType: string;
+  contractType: ContractType;
   email: string;
   onRemove: (id: number) => void;
  isRemoving?: boolean;
