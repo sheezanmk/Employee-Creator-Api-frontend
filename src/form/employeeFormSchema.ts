@@ -21,8 +21,7 @@ export const employeeFormSchema = z.object({
   .max(60, "Maximum is 60"),
 })
 .superRefine ((data, ctx) => {
-    // If ongoing is true, finishDate should not be required
-    // If ongoing is false, finishDate should exist (for CONTRACT generally)
+
     if (!data.ongoing && !data.finishDate) {
       ctx.addIssue({
         code: "custom",

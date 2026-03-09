@@ -31,6 +31,7 @@ const EmployeeCard = ({id, firstName, lastName, contractType, email, onRemove, i
       </div>
 
       <div className={styles.actions}>
+        <Button to={`/employees/${id}`}>View</Button>
         <Button to={`/employees/${id}/edit`}>Edit</Button>
         <Button onClick={() => onRemove(id)}>Remove</Button>
       </div>

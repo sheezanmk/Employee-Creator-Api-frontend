@@ -37,17 +37,22 @@ export default function EmployeeForm({
     },
   });
 
-  // If defaultValues arrive async (edit page), reset the form once data is loaded
+  
   useEffect(() => {
     if (defaultValues) reset({ ...defaultValues } as EmployeeFormValues);
   }, [defaultValues, reset]);
 
   const ongoing = watch("ongoing");
+  const workType = watch("workType");
 
-  // If ongoing is true, clear finishDate to avoid confusion
+
   useEffect(() => {
     if (ongoing) setValue("finishDate", "");
   }, [ongoing, setValue]);
+
+  useEffect(() => {
+  if (workType === "FULL_TIME") setValue("hoursPerWeek", 38);
+}, [workType, setValue]);
 
   return (
     <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
@@ -134,7 +139,7 @@ export default function EmployeeForm({
 
         <div className={styles.field}>
           <label>Hours per week</label>
-          <input type="number" min={1} max={60} {...register("hoursPerWeek", { valueAsNumber: true })} />
+          <input type="number" min={1} max={60} disabled={workType === "FULL_TIME"} {...register("hoursPerWeek", { valueAsNumber: true })} />
           {errors.hoursPerWeek && (
             <p className={styles.error}>{errors.hoursPerWeek.message}</p>
           )}

@@ -19,8 +19,8 @@ const handleRemove = (id: number) => {
   return (
     <PageLayout
     title="Employees’ list"
-      subtitle="Please click on ‘Edit’ to find more details of each employee."
-      actions={<Button to="/employees/new">Add employee</Button>}
+      subtitle="Use View to see employee details or Edit to update employee information."
+      actions={<Button to="/employees/new">Add Employee</Button>}
       >
 
         {isLoading && <p>Loading employees...</p>}
