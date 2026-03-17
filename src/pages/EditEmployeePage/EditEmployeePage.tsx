@@ -2,8 +2,9 @@ import { useNavigate, useParams } from "react-router-dom";
 import PageLayout from "../../components/PageLayout/PageLayout";
 import EmployeeForm from "../../components/CreateEmployeeForm/EmployeeForm";
 import type { EmployeeFormValues } from "../../form/employeeFormSchema";
-import { useEmployee } from "../../hooks/useEmployee";
+import { useEmployee } from "../../hooks/UseEmployee";
 import { useEmployeeMutations } from "../../hooks/UseEmployeeMutations";
+import toast from "react-hot-toast";
 
 const EditEmployeePage = () => {
 
@@ -18,16 +19,22 @@ const { data, isLoading, error } = useEmployee(id);
     else navigate("/employees");
   };
 
-  const handleSubmit = async (values: EmployeeFormValues) => {
-    if (!id) return;
+const handleSubmit = async (values: EmployeeFormValues) => {
+  if (!id) return;
 
+  try {
     await updateMutation.mutateAsync({
       id: Number(id),
       data: values,
     });
 
+    toast.success("Employee updated successfully");
     navigate(`/employees/${id}`);
-  };
+  } catch (err) {
+    toast.error("Failed to update employee");
+  }
+};
+
  return (
     <PageLayout title="Edit employee">
       {isLoading && <p>Loading employee...</p>}

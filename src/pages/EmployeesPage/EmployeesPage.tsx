@@ -3,17 +3,25 @@ import Button from "../../components/Button/Button";
 import EmployeeCard from "../../components/EmployeeCard/EmployeeCard";
 import { useEmployees } from "../../hooks/UseEmployees";
 import { useEmployeeMutations } from "../../hooks/UseEmployeeMutations";
+import toast from "react-hot-toast";
+
 
 const EmployeesPage = () => {
 
 const { data, isLoading, error } = useEmployees();
 const { deleteMutation } = useEmployeeMutations();
 
-const handleRemove = (id: number) => {
+
+const handleRemove = async (id: number) => {
   const ok = window.confirm("Are you sure you want to remove this employee?");
   if (!ok) return;
 
-  deleteMutation.mutate(id);
+  try {
+    await deleteMutation.mutateAsync(id);
+    toast.success("Employee removed successfully");
+  } catch (err) {
+    toast.error("Failed to remove employee");
+  }
 };
 
   return (
@@ -26,6 +34,8 @@ const handleRemove = (id: number) => {
         {isLoading && <p>Loading employees...</p>}
 
       {error && <p style={{ color: "red" }}>Failed to load employees</p>}
+       
+
 
       {data &&
         data.map((emp) => (
@@ -41,6 +51,7 @@ const handleRemove = (id: number) => {
 />
       ))}
 
+     
 
 
       </PageLayout>
